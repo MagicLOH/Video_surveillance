@@ -32,6 +32,12 @@ int width, height;
 static char *image_buffer;  // 传输图像缓冲区
 static int image_size;      // 传输图像大小
 
+/**
+ * @brief HTTP服务器发送图像函数
+ * 
+ * @param sockfd 
+ * @return int 
+ */
 int HTTP_SendImage(int sockfd) {
     char buff[1024] =
         "HTTP/1.0 200 OK\r\n"
@@ -90,6 +96,14 @@ int HTTP_SendImage(int sockfd) {
     return 0;
 }
 
+/**
+ * @brief 发送HTTP报文函数
+ * 
+ * @param sockfd 
+ * @param type 
+ * @param file_path 
+ * @return int 
+ */
 int HTTP_SendContent(int sockfd, char *type, const char *file_path) {
     int fd = open(file_path, O_RDONLY);
     if (-1 == fd)
@@ -126,6 +140,12 @@ int HTTP_SendContent(int sockfd, char *type, const char *file_path) {
     return 0;
 }
 
+/**
+ * @brief HTTP客户端服务线程
+ * 
+ * @param arg 
+ * @return void* 
+ */
 void *http_thread(void *arg) {
     int c_fd = *(int *)arg;
     free(arg);
@@ -155,6 +175,12 @@ void *http_thread(void *arg) {
     pthread_exit(NULL);
 }
 
+/**
+ * @brief 摄像头捕获线程
+ * 
+ * @param arg 
+ * @return void* 
+ */
 void *Camera_CaptureThraed(void *arg) {
     int camera_fd = *(int *)arg;
     printf("This is Camera capture thread!\n");
