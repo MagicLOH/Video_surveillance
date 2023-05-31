@@ -267,6 +267,7 @@ int main(int argc, char *argv[]) {
     pthread_create(&pthid, NULL, Camera_CaptureThraed, (void *)&camera_fd);
     pthread_detach(pthid);
 
+    /* 开始搭建TCP服务端 */
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1)
         errEXIT("创建网络套接字失败");
