@@ -35,7 +35,7 @@ static int image_size;      // 传输图像大小
 int HTTP_SendImage(int sockfd) {
     char buff[1024] =
         "HTTP/1.0 200 OK\r\n"
-        "Server: wbyq\r\n"
+        "Server: toyz\r\n"
         "Content-Type:multipart/x-mixed-replace;boundary=boundarydonotcross\r\n"
         "\r\n"
         "--boundarydonotcross\r\n";
