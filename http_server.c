@@ -97,7 +97,7 @@ int HTTP_SendImage(int sockfd) {
 }
 
 /**
- * @brief 发送HTTP报文函数
+ * @brief 发送HTTP报文+实体内容
  * 
  * @param sockfd 
  * @param type 
@@ -128,6 +128,7 @@ int HTTP_SendContent(int sockfd, char *type, const char *file_path) {
 
     ssize_t rd_s = 0;
     while (1) {
+		/* 发送Image文件到客户端 */
         rd_s = read(fd, buff, sizeof(buff));
         // printf("读取到文件内容%ldbyte,正在发送给客户端\n", rd_s);
         write(sockfd, buff, rd_s);
@@ -141,7 +142,7 @@ int HTTP_SendContent(int sockfd, char *type, const char *file_path) {
 }
 
 /**
- * @brief HTTP客户端服务线程
+ * @brief HTTP服务端处理请求
  * 
  * @param arg 
  * @return void* 
